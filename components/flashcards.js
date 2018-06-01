@@ -25,6 +25,13 @@ const flashcards = {
 };
 
 export default function getDecks() {
-  //return Object.keys(flashcards).map(key => flashcards[key]);
   return Object.values(flashcards);
+}
+
+export function getDeckByTitle(title) {
+  return flashcards['React'];
+}
+
+export function getDecks01() {
+  return flashcards;
 }

@@ -18,7 +18,11 @@ export default class DeckList extends Component {
           data={decks}
           renderItem={({ item }) => (
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Card')}
+              onPress={() =>
+                this.props.navigation.navigate('Card', {
+                  titleCard: item.title
+                })
+              }
             >
               <View style={[styles.box]}>
                 <Text style={[styles.title]}>{item.title}</Text>

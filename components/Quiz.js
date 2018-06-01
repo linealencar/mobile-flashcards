@@ -9,11 +9,9 @@ export default class Quiz extends Component {
         <TouchableOpacity style={styles.button} onPress={this.onPress}>
           <Text> Answer </Text>
         </TouchableOpacity>
-
         <TouchableOpacity style={styles.button} onPress={this.onPress}>
           <Text> Correct </Text>
         </TouchableOpacity>
-
         <TouchableOpacity style={styles.button} onPress={this.onPress}>
           <Text> Incorrect </Text>
         </TouchableOpacity>

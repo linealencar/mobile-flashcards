@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 // import getDecks from './flashcards';
 import Card from './components/Card';
+import Quiz from './components/Quiz';
 import DeckList from './components/DeckList';
 import { createStackNavigator } from 'react-navigation';
 
@@ -11,6 +12,9 @@ const Stack = createStackNavigator({
   },
   Card: {
     screen: Card
+  },
+  Quiz: {
+    screen: Quiz
   }
 });
 
