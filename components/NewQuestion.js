@@ -7,7 +7,7 @@ import {
   TextInput
 } from 'react-native';
 
-export default class NewCard extends Component {
+export default class NewQuestion extends Component {
   state = {
     input: ''
   };
@@ -19,18 +19,16 @@ export default class NewCard extends Component {
     const { input } = this.state;
     return (
       <View style={styles.container}>
-        <Text>Title</Text>
+        <Text>Question</Text>
+        <TouchableOpacity style={styles.button}>
+          <Text> Submit </Text>
+        </TouchableOpacity>
+
         <TextInput
           value={input}
           style={styles.input}
           onChange={this.handleTextChange}
         />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => this.props.navigation.navigate('NewQuestion')}
-        >
-          <Text> Submit </Text>
-        </TouchableOpacity>
       </View>
     );
   }
@@ -53,7 +51,7 @@ const styles = StyleSheet.create({
     height: 44,
     padding: 8,
     borderWidth: 1,
-    borderColor: '#0A67A3',
+    borderColor: '#fcfcfc',
     margin: 50
   }
 });

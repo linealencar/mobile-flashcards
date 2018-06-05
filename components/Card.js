@@ -41,9 +41,15 @@ export default class Card extends Component {
         <Text>3 Cards -</Text>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => this.props.navigation.navigate('Quiz')}
+          onPress={() => this.props.navigation.navigate('NewCard')}
         >
           <Text> Add Card </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => this.props.navigation.navigate('Quiz')}
+        >
+          <Text> Quiz </Text>
         </TouchableOpacity>
       </View>
     );
@@ -60,6 +66,7 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     backgroundColor: '#DDDDDD',
-    padding: 10
+    padding: 10,
+    margin: 10
   }
 });

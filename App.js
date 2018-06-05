@@ -4,6 +4,8 @@ import { StyleSheet, Text, View, FlatList } from 'react-native';
 import Card from './components/Card';
 import Quiz from './components/Quiz';
 import DeckList from './components/DeckList';
+import NewCard from './components/NewCard';
+import NewQuestion from './components/NewQuestion';
 import { createStackNavigator } from 'react-navigation';
 
 const Stack = createStackNavigator({
@@ -15,6 +17,12 @@ const Stack = createStackNavigator({
   },
   Quiz: {
     screen: Quiz
+  },
+  NewCard: {
+    screen: NewCard
+  },
+  NewQuestion: {
+    screen: NewQuestion
   }
 });
 
