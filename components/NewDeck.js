@@ -6,29 +6,33 @@ import {
   TouchableOpacity,
   TextInput
 } from 'react-native';
+import { submitDeck } from '../utils/API';
 
-export default class NewCard extends Component {
+export default class NewDeck extends Component {
   state = {
-    input: ''
+    title: ''
   };
 
-  handleTextChange = input => {
-    this.setState(() => ({ input }));
+  handleTextChange = title => {
+    this.setState(() => ({ title }));
+  };
+
+  submit = () => {
+    const title = this.state.title;
+    submitDeck(title);
   };
   render() {
-    const { input } = this.state;
+    const { title } = this.state;
     return (
       <View style={styles.container}>
         <Text>Title</Text>
         <TextInput
-          value={input}
+          value={title}
           style={styles.input}
-          onChange={this.handleTextChange}
+          onChangeText={this.handleTextChange}
         />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => this.props.navigation.navigate('NewQuestion')}
-        >
+
+        <TouchableOpacity style={styles.button} onPress={() => this.submit()}>
           <Text> Submit </Text>
         </TouchableOpacity>
       </View>

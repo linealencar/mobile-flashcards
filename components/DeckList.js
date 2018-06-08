@@ -4,14 +4,58 @@ import {
   Text,
   View,
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage
 } from 'react-native';
 import getDecks from './flashcards';
+import { getDeckList } from '../utils/API';
 
 export default class DeckList extends Component {
+  componentDidMount() {
+    // try {
+    //   var value = AsyncStorage.getItem('@flashCards:card');
+    //   if (value !== null) {
+    //     //this.setState({selectedValue: value});
+    //     console.log('Recovered selection from disk: ' + value);
+    //   } else {
+    //     console.log('Initialized with no selection on disk.');
+    //   }
+    // } catch (error) {
+    //   console.log('AsyncStorage error: ' + error.message);
+    // }
+
+    // const dumpRaw = () => {
+    //   return AsyncStorage.getAllKeys().then(keys => {
+    //     return Promise.reduce(
+    //       keys,
+    //       (result, key) => {
+    //         return AsyncStorage.getItem(key).then(value => {
+    //           result[key] = value;
+    //           return result;
+    //         });
+    //       },
+    //       {}
+    //     );
+    //   });
+    // };
+
+    // dumpRaw().then(data => console.log('Data ' + data));
+
+    AsyncStorage.getItem('@flashCards:card').then(
+      resultData => {
+        alert(resultData);
+        //console.log(Object.values(resultData));
+      }
+      //resultData.map(deck => alert(deck.title));
+    );
+    // console.log('Async ' + resultData);
+  }
+
   render() {
     const decks = getDecks();
-    console.log(decks);
+    //const decks02 = getDeckList();
+    // console.log('Decks 02 ' + decks02);
+
     return (
       <View style={styles.container}>
         <FlatList
@@ -19,7 +63,7 @@ export default class DeckList extends Component {
           renderItem={({ item }) => (
             <TouchableOpacity
               onPress={() =>
-                this.props.navigation.navigate('Card', {
+                this.props.navigation.navigate('Deck', {
                   titleCard: item.title
                 })
               }
