@@ -7,54 +7,19 @@ import {
   TouchableOpacity,
   AsyncStorage
 } from 'react-native';
-import getDecks from './flashcards';
-import { getDeckList } from '../utils/API';
 
 export default class DeckList extends Component {
+  state = {
+    decks: []
+  };
   componentDidMount() {
-    // try {
-    //   var value = AsyncStorage.getItem('@flashCards:card');
-    //   if (value !== null) {
-    //     //this.setState({selectedValue: value});
-    //     console.log('Recovered selection from disk: ' + value);
-    //   } else {
-    //     console.log('Initialized with no selection on disk.');
-    //   }
-    // } catch (error) {
-    //   console.log('AsyncStorage error: ' + error.message);
-    // }
-
-    // const dumpRaw = () => {
-    //   return AsyncStorage.getAllKeys().then(keys => {
-    //     return Promise.reduce(
-    //       keys,
-    //       (result, key) => {
-    //         return AsyncStorage.getItem(key).then(value => {
-    //           result[key] = value;
-    //           return result;
-    //         });
-    //       },
-    //       {}
-    //     );
-    //   });
-    // };
-
-    // dumpRaw().then(data => console.log('Data ' + data));
-
-    AsyncStorage.getItem('@flashCards:card').then(
-      resultData => {
-        alert(resultData);
-        //console.log(Object.values(resultData));
-      }
-      //resultData.map(deck => alert(deck.title));
-    );
-    // console.log('Async ' + resultData);
+    AsyncStorage.getItem('@flashCards:card').then(resultData => {
+      this.setState({ decks: Object.values(JSON.parse(resultData)) });
+    });
   }
 
   render() {
-    const decks = getDecks();
-    //const decks02 = getDeckList();
-    // console.log('Decks 02 ' + decks02);
+    const { decks } = this.state;
 
     return (
       <View style={styles.container}>
@@ -64,7 +29,7 @@ export default class DeckList extends Component {
             <TouchableOpacity
               onPress={() =>
                 this.props.navigation.navigate('Deck', {
-                  titleCard: item.title
+                  deck: item
                 })
               }
             >
@@ -84,6 +49,12 @@ export default class DeckList extends Component {
           )}
           keyExtractor={(item, index) => index.toString()}
         />
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => this.props.navigation.navigate('NewDeck')}
+        >
+          <Text> Add Deck </Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -103,5 +74,10 @@ const styles = StyleSheet.create({
     color: '#e76e63',
     fontWeight: 'bold',
     fontSize: 30
+  },
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#DDDDDD',
+    padding: 10
   }
 });

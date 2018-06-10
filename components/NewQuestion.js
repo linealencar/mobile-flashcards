@@ -6,29 +6,46 @@ import {
   TouchableOpacity,
   TextInput
 } from 'react-native';
+import { updateQuestion } from '../utils/API';
 
 export default class NewQuestion extends Component {
   state = {
-    input: ''
+    question: '',
+    answer: ''
   };
 
-  handleTextChange = input => {
-    this.setState(() => ({ input }));
+  handleTextChange = (question, answer) => {
+    this.setState(() => ({ question, answer }));
+  };
+  submitQuestions = () => {
+    const title = this.state.title;
+    submitDeck(title);
+    this.props.navigation.navigate('Deck');
   };
   render() {
-    const { input } = this.state;
+    const { question, answer } = this.state;
+    const titleDeck = this.props.navigation.getParam('titleDeck');
+    console.log(titleDeck);
     return (
       <View style={styles.container}>
         <Text>Question</Text>
+
+        <TextInput
+          value={question}
+          style={styles.input}
+          onChangeText={this.handleTextChange}
+        />
+        <Text>Answer</Text>
+
+        <TextInput
+          value={answer}
+          style={styles.input}
+          onChangeText={this.handleTextChange}
+        />
+
         <TouchableOpacity style={styles.button}>
           <Text> Submit </Text>
         </TouchableOpacity>
-
-        <TextInput
-          value={input}
-          style={styles.input}
-          onChange={this.handleTextChange}
-        />
       </View>
     );
   }
@@ -51,7 +68,7 @@ const styles = StyleSheet.create({
     height: 44,
     padding: 8,
     borderWidth: 1,
-    borderColor: '#fcfcfc',
+    borderColor: '#ff0000',
     margin: 50
   }
 });

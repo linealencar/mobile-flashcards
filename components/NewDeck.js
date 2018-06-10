@@ -20,6 +20,7 @@ export default class NewDeck extends Component {
   submit = () => {
     const title = this.state.title;
     submitDeck(title);
+    this.props.navigation.navigate('DeckList');
   };
   render() {
     const { title } = this.state;

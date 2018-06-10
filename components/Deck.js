@@ -5,20 +5,25 @@ import getDecks01 from './flashcards';
 
 export default class Deck extends Component {
   render() {
+    const deck = this.props.navigation.getParam('deck');
     return (
       <View style={styles.container}>
-        <Text>3 Cards -</Text>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => this.props.navigation.navigate('NewDeck')}
-        >
-          <Text> Add Deck </Text>
-        </TouchableOpacity>
+        <Text>{deck.questions.length} Cards</Text>
         <TouchableOpacity
           style={styles.button}
           onPress={() => this.props.navigation.navigate('Quiz')}
         >
           <Text> Quiz </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() =>
+            this.props.navigation.navigate('NewQuestion', {
+              titleDeck: deck.title
+            })
+          }
+        >
+          <Text> Add Question </Text>
         </TouchableOpacity>
       </View>
     );

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
-// import getDecks from './flashcards';
 import Deck from './components/Deck';
 import Quiz from './components/Quiz';
 import DeckList from './components/DeckList';
