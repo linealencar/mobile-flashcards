@@ -19,7 +19,7 @@ export default class Deck extends Component {
           style={styles.button}
           onPress={() =>
             this.props.navigation.navigate('NewQuestion', {
-              titleDeck: deck.title
+              deck: deck
             })
           }
         >

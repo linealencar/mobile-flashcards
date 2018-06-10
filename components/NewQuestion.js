@@ -14,18 +14,18 @@ export default class NewQuestion extends Component {
     answer: ''
   };
 
-  handleTextChange = (question, answer) => {
-    this.setState(() => ({ question, answer }));
-  };
   submitQuestions = () => {
-    const title = this.state.title;
-    submitDeck(title);
+    const { question, answer } = this.state;
+    const deck = this.props.navigation.getParam('deck');
+    const newQuestion = { question: question, answer: answer };
+    deck.questions.push(question);
+    title = deck.title;
+
+    updateQuestion({ title, deck });
     this.props.navigation.navigate('Deck');
   };
   render() {
     const { question, answer } = this.state;
-    const titleDeck = this.props.navigation.getParam('titleDeck');
-    console.log(titleDeck);
     return (
       <View style={styles.container}>
         <Text>Question</Text>
@@ -33,17 +33,20 @@ export default class NewQuestion extends Component {
         <TextInput
           value={question}
           style={styles.input}
-          onChangeText={this.handleTextChange}
+          onChangeText={question => this.setState({ question })}
         />
         <Text>Answer</Text>
 
         <TextInput
           value={answer}
           style={styles.input}
-          onChangeText={this.handleTextChange}
+          onChangeText={answer => this.setState({ answer })}
         />
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => this.submitQuestions()}
+        >
           <Text> Submit </Text>
         </TouchableOpacity>
       </View>
