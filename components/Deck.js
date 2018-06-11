@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default class Deck extends Component {
+  static navigationOptions = ({ navigation }) => {
+    const { deck } = navigation.state.params;
+
+    return {
+      title: deck.title
+    };
+  };
   render() {
     const deck = this.props.navigation.getParam('deck');
     return (

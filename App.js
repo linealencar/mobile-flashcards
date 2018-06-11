@@ -9,19 +9,53 @@ import { createStackNavigator } from 'react-navigation';
 
 const Stack = createStackNavigator({
   DeckList: {
-    screen: DeckList
+    screen: DeckList,
+    navigationOptions: {
+      title: 'Deck List',
+      headerTintColor: '#424B54',
+      headerStyle: {
+        backgroundColor: '#EBCFB2'
+      }
+    }
   },
   Deck: {
-    screen: Deck
+    screen: Deck,
+    navigationOptions: {
+      headerTintColor: '#424B54',
+      headerStyle: {
+        backgroundColor: '#EBCFB2'
+      }
+    }
   },
   Quiz: {
-    screen: Quiz
+    screen: Quiz,
+    navigationOptions: {
+      title: 'Quiz',
+      headerTintColor: '#424B54',
+      headerStyle: {
+        backgroundColor: '#EBCFB2'
+      }
+    }
   },
   NewDeck: {
-    screen: NewDeck
+    screen: NewDeck,
+    navigationOptions: {
+      title: 'New Deck',
+      headerTintColor: '#424B54',
+      headerStyle: {
+        backgroundColor: '#EBCFB2'
+      }
+    }
   },
   NewQuestion: {
-    screen: NewQuestion
+    screen: NewQuestion,
+    navigationOptions: {
+      title: 'New Question',
+      headerTintColor: '#424B54',
+      headerStyle: {
+        backgroundColor: '#EBCFB2'
+      }
+    }
   }
 });
 
