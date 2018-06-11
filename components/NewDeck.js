@@ -26,7 +26,7 @@ export default class NewDeck extends Component {
     const { title } = this.state;
     return (
       <View style={styles.container}>
-        <Text>Title</Text>
+        <Text style={styles.text}>Title</Text>
         <TextInput
           value={title}
           style={styles.input}
@@ -34,7 +34,7 @@ export default class NewDeck extends Component {
         />
 
         <TouchableOpacity style={styles.button} onPress={() => this.submit()}>
-          <Text> Submit </Text>
+          <Text style={styles.textButton}> Submit </Text>
         </TouchableOpacity>
       </View>
     );
@@ -48,17 +48,35 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start'
   },
+  text: {
+    color: '#424B54',
+    fontWeight: 'bold',
+    fontSize: 30
+  },
+  textButton: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 20
+  },
   button: {
+    backgroundColor: '#424B54',
+    width: 200,
+    height: 45,
+    borderColor: '#fff',
+    borderWidth: 1,
+    borderRadius: 5,
     alignItems: 'center',
-    backgroundColor: '#DDDDDD',
-    padding: 10
+    justifyContent: 'center'
   },
   input: {
-    width: 200,
+    width: 300,
     height: 44,
     padding: 8,
     borderWidth: 1,
-    borderColor: '#0A67A3',
-    margin: 50
+    borderRadius: 5,
+    borderColor: '#C5BAAF',
+    margin: 5,
+    fontSize: 20,
+    color: '#424B54'
   }
 });

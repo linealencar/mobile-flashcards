@@ -22,7 +22,7 @@ export default class DeckList extends Component {
     const { decks } = this.state;
 
     return (
-      <View style={styles.container}>
+      <View>
         <FlatList
           data={decks}
           renderItem={({ item }) => (
@@ -33,19 +33,11 @@ export default class DeckList extends Component {
                 })
               }
             >
-              <View style={[styles.box]}>
-                <Text style={[styles.title]}>{item.title}</Text>
-                <Text>{item.questions.length} Cards</Text>
+              <View style={styles.item}>
+                <Text style={styles.text}>{item.title}</Text>
+                <Text>{item.questions.length} cards</Text>
               </View>
             </TouchableOpacity>
-          )}
-          ItemSeparatorComponent={() => (
-            <View
-              style={{
-                height: 1,
-                backgroundColor: '#CED0CE'
-              }}
-            />
           )}
           keyExtractor={(item, index) => index.toString()}
         />
@@ -53,7 +45,7 @@ export default class DeckList extends Component {
           style={styles.button}
           onPress={() => this.props.navigation.navigate('NewDeck')}
         >
-          <Text> Add Deck </Text>
+          <Text style={[styles.textButton]}> Add Deck </Text>
         </TouchableOpacity>
       </View>
     );
@@ -61,23 +53,31 @@ export default class DeckList extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
+  item: {
     alignItems: 'center',
-    justifyContent: 'flex-start'
+    backgroundColor: '#E1CE7A',
+    flexGrow: 1,
+    margin: 1,
+    padding: 3
   },
-  box: {
-    flex: 1
-  },
-  title: {
-    color: '#e76e63',
+  text: {
+    color: '#424B54',
     fontWeight: 'bold',
-    fontSize: 30
+    fontSize: 20
+  },
+  textButton: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 20
   },
   button: {
+    backgroundColor: '#424B54',
+    width: 200,
+    height: 45,
+    borderColor: '#fff',
+    borderWidth: 1,
+    borderRadius: 5,
     alignItems: 'center',
-    backgroundColor: '#DDDDDD',
-    padding: 10
+    justifyContent: 'center'
   }
 });

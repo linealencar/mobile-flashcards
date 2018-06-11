@@ -28,14 +28,14 @@ export default class NewQuestion extends Component {
     const { question, answer } = this.state;
     return (
       <View style={styles.container}>
-        <Text>Question</Text>
+        <Text style={styles.text}>Question</Text>
 
         <TextInput
           value={question}
           style={styles.input}
           onChangeText={question => this.setState({ question })}
         />
-        <Text>Answer</Text>
+        <Text style={styles.text}>Answer</Text>
 
         <TextInput
           value={answer}
@@ -47,7 +47,7 @@ export default class NewQuestion extends Component {
           style={styles.button}
           onPress={() => this.submitQuestions()}
         >
-          <Text> Submit </Text>
+          <Text style={styles.textButton}> Submit </Text>
         </TouchableOpacity>
       </View>
     );
@@ -61,17 +61,35 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start'
   },
+  text: {
+    color: '#424B54',
+    fontWeight: 'bold',
+    fontSize: 20
+  },
+  textButton: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 20
+  },
   button: {
+    backgroundColor: '#424B54',
+    width: 200,
+    height: 45,
+    borderColor: '#fff',
+    borderWidth: 1,
+    borderRadius: 5,
     alignItems: 'center',
-    backgroundColor: '#DDDDDD',
-    padding: 10
+    justifyContent: 'center'
   },
   input: {
-    width: 200,
+    width: 300,
     height: 44,
     padding: 8,
     borderWidth: 1,
-    borderColor: '#ff0000',
-    margin: 50
+    borderRadius: 5,
+    borderColor: '#C5BAAF',
+    margin: 5,
+    fontSize: 20,
+    color: '#424B54'
   }
 });
