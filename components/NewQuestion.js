@@ -18,7 +18,7 @@ export default class NewQuestion extends Component {
     const { question, answer } = this.state;
     const deck = this.props.navigation.getParam('deck');
     const newQuestion = { question: question, answer: answer };
-    deck.questions.push(question);
+    deck.questions.push(newQuestion);
     title = deck.title;
 
     updateQuestion({ title, deck });

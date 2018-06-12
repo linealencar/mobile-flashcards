@@ -15,3 +15,13 @@ export function updateQuestion({ title, deck }) {
     JSON.stringify({ [title]: deck })
   );
 }
+
+export function getDecks() {
+  return AsyncStorage.getItem(CARD_STORAGE_KEY).then(resultData => {
+    Object.values(JSON.parse(resultData));
+  });
+}
+
+export function remove() {
+  return AsyncStorage.removeItem(CARD_STORAGE_KEY);
+}

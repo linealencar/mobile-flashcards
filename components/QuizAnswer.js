@@ -1,34 +1,46 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
-export default class Quiz extends Component {
+export default class QuizAnswer extends Component {
   state = {
-    index: 0
+    index: 0,
+    indexMax: 0,
+    score: 0
   };
+
+  componentDidMount() {
+    const questions = this.props.navigation.getParam('questions');
+    const index = this.props.navigation.getParam('index');
+    const indexMax = questions.length;
+
+    this.setState({ indexMax: indexMax, index: index });
+  }
+  // submitCorrectAnswer = () => {
+  //   this.setState({ score: score + 1 });
+
+  //   const { index } = this.state;
+  //   const newIndex = index + 1;
+
+  //   if (newIndex < indexMax) {
+  //     this.props.navigation.navigate('QuizAnswer');
+  //   }
+
+  //   this.setState({ index: index + 1 });
+  // };
   render() {
     const questions = this.props.navigation.getParam('questions');
-    const { index } = this.state;
-    console.log(questions[index]);
+    const index = this.props.navigation.getParam('index');
     return (
       <View style={styles.container}>
-        <Text style={styles.bigText}>{questions[index].question}?</Text>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() =>
-            this.props.navigation.navigate('QuizAnswer', {
-              questions: questions,
-              index: index
-            })
-          }
-        >
-          <Text style={styles.textButton}> Answer </Text>
-        </TouchableOpacity>
-        {/* <TouchableOpacity style={styles.button} onPress={this.onPress}>
+        <Text style={styles.bigText}>{question.question}?</Text>
+        <Text style={styles.mediumText}>{question.answer}</Text>
+
+        <TouchableOpacity style={[styles.button]} onPress={this.onPress}>
           <Text style={styles.textButton}> Correct </Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={this.onPress}>
           <Text style={styles.textButton}> Incorrect </Text>
-        </TouchableOpacity> */}
+        </TouchableOpacity>
       </View>
     );
   }
@@ -46,6 +58,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 50
   },
+  mediumText: {
+    color: '#C5BAAF',
+    fontWeight: 'bold',
+    fontSize: 40
+  },
+
   text: {
     color: '#424B54',
     fontWeight: 'bold',
@@ -66,5 +84,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     margin: 5
+  },
+  green: {
+    backgroundColor: '#2E3D34'
+  },
+  red: {
+    backgroundColor: '#F00'
   }
 });

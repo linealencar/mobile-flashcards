@@ -7,19 +7,33 @@ import {
   TouchableOpacity,
   AsyncStorage
 } from 'react-native';
+import { connect } from 'react-redux';
+import { loadDecks } from '../actions';
+import { fetchDecks } from '../actions';
+//import { getDecks } from '../utils/API';
 
-export default class DeckList extends Component {
+class DeckList extends Component {
   state = {
     decks: []
   };
   componentDidMount() {
+    //this.props.fetchDecks();
     AsyncStorage.getItem('@flashCards:card').then(resultData => {
+      //this.props.dispatch(loadDecks(Object.values(JSON.parse(resultData))));
+      this.setState({ decks: Object.values(JSON.parse(resultData)) });
+    });
+  }
+
+  componentDidUpdate() {
+    AsyncStorage.getItem('@flashCards:card').then(resultData => {
+      //this.props.dispatch(loadDecks(Object.values(JSON.parse(resultData))));
       this.setState({ decks: Object.values(JSON.parse(resultData)) });
     });
   }
 
   render() {
     const { decks } = this.state;
+    //const { decks } = this.props;
 
     return (
       <View>
@@ -51,6 +65,15 @@ export default class DeckList extends Component {
     );
   }
 }
+// const mapStateToProps = ({ decks }) => ({
+//   decks
+// });
+
+// const mapDispatchToProps = dispatch => ({
+//   fetchDecks: () => dispatch(fetchDecks())
+// });
+//export default connect(mapStateToProps, mapDispatchToProps)(DeckList);
+export default DeckList;
 
 const styles = StyleSheet.create({
   item: {

@@ -5,6 +5,11 @@ import Quiz from './components/Quiz';
 import DeckList from './components/DeckList';
 import NewDeck from './components/NewDeck';
 import NewQuestion from './components/NewQuestion';
+import QuizAnswer from './components/QuizAnswer';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './reducers';
+
 import { createStackNavigator } from 'react-navigation';
 
 const Stack = createStackNavigator({
@@ -56,12 +61,27 @@ const Stack = createStackNavigator({
         backgroundColor: '#EBCFB2'
       }
     }
+  },
+  QuizAnswer: {
+    screen: QuizAnswer,
+    navigationOptions: {
+      title: 'Quiz Answer',
+      headerTintColor: '#424B54',
+      headerStyle: {
+        backgroundColor: '#EBCFB2'
+      }
+    }
   }
 });
 
 export default class App extends Component {
   render() {
-    return <Stack />;
+    const store = createStore(reducer);
+    return (
+      <Provider store={store}>
+        <Stack />
+      </Provider>
+    );
   }
 }
 
