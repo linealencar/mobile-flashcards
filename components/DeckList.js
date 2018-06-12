@@ -19,9 +19,12 @@ class DeckList extends Component {
   componentDidMount() {
     //this.props.fetchDecks();
     AsyncStorage.getItem('@flashCards:card').then(resultData => {
-      //this.props.dispatch(loadDecks(Object.values(JSON.parse(resultData))));
-      this.setState({ decks: Object.values(JSON.parse(resultData)) });
+      this.props.dispatch(loadDecks(Object.values(JSON.parse(resultData))));
     });
+    // getDecks().then(resultData => {
+    //   console.log(resultData);
+    //   this.setState({ decks: Object.values(JSON.parse(resultData)) });
+    // });
   }
 
   componentDidUpdate() {
