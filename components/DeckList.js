@@ -10,30 +10,33 @@ import {
 import { connect } from 'react-redux';
 import { loadDecks } from '../actions';
 import { fetchDecks } from '../actions';
-//import { getDecks } from '../utils/API';
+import { getDecks } from '../utils/API';
 
 class DeckList extends Component {
   state = {
     decks: []
   };
   componentDidMount() {
-    //this.props.fetchDecks();
-    AsyncStorage.getItem('@flashCards:card').then(resultData => {
-      //this.props.dispatch(loadDecks(Object.values(JSON.parse(resultData))));
-      this.setState({ decks: Object.values(JSON.parse(resultData)) });
-    });
+    this.props.fetchDecks();
+    // AsyncStorage.getItem('@flashCards:card').then(resultData => {
+    // getDecks().then(resultData => {
+    // this.props.dispatch(loadDecks(Object.values(JSON.parse(resultData))));
+    //this.setState({ decks: Object.values(JSON.parse(resultData)) });
+    // });
   }
 
   componentDidUpdate() {
-    AsyncStorage.getItem('@flashCards:card').then(resultData => {
-      //this.props.dispatch(loadDecks(Object.values(JSON.parse(resultData))));
-      this.setState({ decks: Object.values(JSON.parse(resultData)) });
-    });
+    // AsyncStorage.getItem('@flashCards:card').then(resultData => {
+    // getDecks().then(resultData => {
+    // this.props.dispatch(loadDecks(Object.values(JSON.parse(resultData))));
+    //this.setState({ decks: Object.values(JSON.parse(resultData)) });
+    // });
+    this.props.fetchDecks();
   }
 
   render() {
-    const { decks } = this.state;
-    //const { decks } = this.props;
+    //const { decks } = this.state;
+    const { decks } = this.props;
 
     return (
       <View>
@@ -65,15 +68,15 @@ class DeckList extends Component {
     );
   }
 }
-// const mapStateToProps = ({ decks }) => ({
-//   decks
-// });
+const mapStateToProps = ({ decks }) => ({
+  decks
+});
 
-// const mapDispatchToProps = dispatch => ({
-//   fetchDecks: () => dispatch(fetchDecks())
-// });
-//export default connect(mapStateToProps, mapDispatchToProps)(DeckList);
-export default DeckList;
+const mapDispatchToProps = dispatch => ({
+  fetchDecks: () => dispatch(fetchDecks())
+});
+export default connect(mapStateToProps, mapDispatchToProps)(DeckList);
+//export default DeckList;
 
 const styles = StyleSheet.create({
   item: {

@@ -6,7 +6,8 @@ import DeckList from './components/DeckList';
 import NewDeck from './components/NewDeck';
 import NewQuestion from './components/NewQuestion';
 import QuizAnswer from './components/QuizAnswer';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import reducer from './reducers';
 
@@ -76,7 +77,8 @@ const Stack = createStackNavigator({
 
 export default class App extends Component {
   render() {
-    const store = createStore(reducer);
+    const store = createStore(reducer, applyMiddleware(thunk));
+
     return (
       <Provider store={store}>
         <Stack />
