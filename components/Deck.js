@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
+import { fetchDecks } from '../actions';
 
-export default class Deck extends Component {
+class Deck extends Component {
+  componentDidMount() {
+    this.props.fetchDecks();
+  }
   static navigationOptions = ({ navigation }) => {
-    const { deck } = navigation.state.params;
+    const { deckTitle } = navigation.state.params;
 
     return {
-      title: deck.title
+      title: deckTitle
     };
   };
   render() {
-    const deck = this.props.navigation.getParam('deck');
+    const deckTitle = this.props.navigation.getParam('deckTitle');
+    const { decks } = this.props;
+    const deck = decks.find(obj => obj.title === deckTitle);
     return (
       <View style={styles.container}>
         <Text style={styles.bigText}>{deck.questions.length} cards</Text>
@@ -38,6 +45,17 @@ export default class Deck extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  decks: state
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchDecks: () => dispatch(fetchDecks())
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Deck);
 
 const styles = StyleSheet.create({
   container: {

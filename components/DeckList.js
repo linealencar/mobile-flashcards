@@ -8,36 +8,19 @@ import {
   AsyncStorage
 } from 'react-native';
 import { connect } from 'react-redux';
-import { loadDecks } from '../actions';
 import { fetchDecks } from '../actions';
-import { getDecks } from '../utils/API';
 
 class DeckList extends Component {
-  state = {
-    decks: []
-  };
   componentDidMount() {
     this.props.fetchDecks();
-    // AsyncStorage.getItem('@flashCards:card').then(resultData => {
-    // getDecks().then(resultData => {
-    // this.props.dispatch(loadDecks(Object.values(JSON.parse(resultData))));
-    //this.setState({ decks: Object.values(JSON.parse(resultData)) });
-    // });
   }
 
   componentDidUpdate() {
-    // AsyncStorage.getItem('@flashCards:card').then(resultData => {
-    // getDecks().then(resultData => {
-    // this.props.dispatch(loadDecks(Object.values(JSON.parse(resultData))));
-    //this.setState({ decks: Object.values(JSON.parse(resultData)) });
-    // });
     this.props.fetchDecks();
   }
 
   render() {
-    //const { decks } = this.state;
     const { decks } = this.props;
-
     return (
       <View>
         <FlatList
@@ -46,7 +29,7 @@ class DeckList extends Component {
             <TouchableOpacity
               onPress={() =>
                 this.props.navigation.navigate('Deck', {
-                  deck: item
+                  deckTitle: item.title
                 })
               }
             >
@@ -68,15 +51,17 @@ class DeckList extends Component {
     );
   }
 }
-const mapStateToProps = ({ decks }) => ({
-  decks
+const mapStateToProps = state => ({
+  decks: state
 });
 
 const mapDispatchToProps = dispatch => ({
   fetchDecks: () => dispatch(fetchDecks())
 });
-export default connect(mapStateToProps, mapDispatchToProps)(DeckList);
-//export default DeckList;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DeckList);
 
 const styles = StyleSheet.create({
   item: {

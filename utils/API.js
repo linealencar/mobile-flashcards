@@ -18,8 +18,7 @@ export function updateQuestion({ title, deck }) {
 
 export function getDecks() {
   return AsyncStorage.getItem(CARD_STORAGE_KEY).then(resultData => {
-    console.log('API ' + JSON.parse(resultData));
-    Object.values(JSON.parse(resultData));
+    return Object.values(JSON.parse(resultData));
   });
 }
 
