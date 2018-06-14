@@ -7,8 +7,10 @@ import {
   TextInput
 } from 'react-native';
 import { submitDeck } from '../utils/API';
+import { connect } from 'react-redux';
+// import { insertDeck } from '../actions';
 
-export default class NewDeck extends Component {
+class NewDeck extends Component {
   state = {
     title: ''
   };
@@ -19,6 +21,7 @@ export default class NewDeck extends Component {
 
   submit = () => {
     const title = this.state.title;
+    // insertDeck(title);
     submitDeck(title);
     this.props.navigation.navigate('DeckList');
   };
@@ -40,6 +43,17 @@ export default class NewDeck extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  decks: state
+});
+
+const mapDispatchToProps = dispatch => ({
+  insertDeck: title => dispatch(insertDeck(title))
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewDeck);
 
 const styles = StyleSheet.create({
   container: {

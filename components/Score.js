@@ -3,9 +3,10 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default class Score extends Component {
   render() {
+    const { score } = this.props;
     return (
       <View style={styles.container}>
-        <Text style={styles.bigText}>Score</Text>
+        <Text style={styles.bigText}>{score}</Text>
       </View>
     );
   }

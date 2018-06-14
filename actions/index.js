@@ -15,8 +15,10 @@ export function addDeck(deck) {
   };
 }
 
-// export const insertPost = post => dispatch =>
-//   APIPost.insert(post).then(post => dispatch(addPost(post)));
+export const insertDeck = title => dispatch =>
+  API.submitDeck(title).then(deck => {
+    dispatch(addDeck(deck));
+  });
 
 export function loadDecks(decks) {
   return {
@@ -28,20 +30,12 @@ export function loadDecks(decks) {
 export const fetchDecks = () => dispatch =>
   API.getDecks().then(decks => dispatch(loadDecks(decks)));
 
-// export const votePost = (postId, voteType) => dispatch =>
-//   APIPost.votePost(postId, voteType).then(post =>
-//     dispatch(votePostFunction(post))
-//   );
-
 export function addQuestion(deck) {
   return {
     type: ADD_QUESTION,
     deck
   };
 }
-
-// export const deletePost = postId => dispatch =>
-//   APIPost.deletePost(postId).then(post => dispatch(deletePostFunction(post)));
 
 export function addCorrectAnswer(post) {
   return {
@@ -56,6 +50,3 @@ export function addIncorrectAnswer(posts) {
     posts
   };
 }
-
-// export const fetchPosts = () => dispatch =>
-//   APIPost.getAll().then(posts => dispatch(loadPostsFunction(posts)));
