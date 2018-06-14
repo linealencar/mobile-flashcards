@@ -1,34 +1,37 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import Card from './Card';
+import Score from './Score';
 
 export default class Quiz extends Component {
   state = {
-    index: 0
+    index: 0,
+    score: 0
   };
+
+  incrementIndex = () => {
+    this.setState({ index: this.state.index + 1 });
+  };
+
+  incrementScore = () => {
+    this.setState({ score: this.state.score + 1 });
+  };
+
   render() {
     const questions = this.props.navigation.getParam('questions');
-    const { index } = this.state;
-    console.log(questions[index]);
+    const { index, score } = this.state;
     return (
       <View style={styles.container}>
-        <Text style={styles.bigText}>{questions[index].question}?</Text>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() =>
-            this.props.navigation.navigate('QuizAnswer', {
-              questions: questions,
-              index: index
-            })
-          }
-        >
-          <Text style={styles.textButton}> Answer </Text>
-        </TouchableOpacity>
-        {/* <TouchableOpacity style={styles.button} onPress={this.onPress}>
-          <Text style={styles.textButton}> Correct </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={this.onPress}>
-          <Text style={styles.textButton}> Incorrect </Text>
-        </TouchableOpacity> */}
+        {index < questions.length ? (
+          <Card
+            questions={questions}
+            index={index}
+            onIncrementIndex={this.incrementIndex}
+            onIncrementScore={this.incrementScore}
+          />
+        ) : (
+          <Score score={score} />
+        )}
       </View>
     );
   }
@@ -40,31 +43,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'flex-start'
-  },
-  bigText: {
-    color: '#424B54',
-    fontWeight: 'bold',
-    fontSize: 50
-  },
-  text: {
-    color: '#424B54',
-    fontWeight: 'bold',
-    fontSize: 20
-  },
-  textButton: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 20
-  },
-  button: {
-    backgroundColor: '#424B54',
-    width: 200,
-    height: 45,
-    borderColor: '#fff',
-    borderWidth: 1,
-    borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 5
   }
 });
