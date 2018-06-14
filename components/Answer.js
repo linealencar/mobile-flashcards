@@ -25,7 +25,7 @@ export default class Answer extends Component {
           <Text style={styles.textButton}> Correct </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.button}
+          style={[styles.button, styles.red]}
           onPress={() => this.submitIncorrectAnswer()}
         >
           <Text style={styles.textButton}> Incorrect </Text>
@@ -67,5 +67,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     margin: 5
+  },
+  red: {
+    backgroundColor: '#ff4040'
+  },
+  incorrect: {
+    backgroundColor: '#00cc00'
   }
 });

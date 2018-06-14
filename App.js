@@ -10,6 +10,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import reducer from './reducers';
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
 
 import {
   createStackNavigator,
@@ -18,10 +19,28 @@ import {
 
 const Tabs = createBottomTabNavigator({
   DeckList: {
-    screen: DeckList
+    screen: DeckList,
+    navigationOptions: {
+      tabBarIcon: () => <FontAwesome name="list" size={30} color="#e1ce7a" />
+    },
+    tabBarOptions: {
+      activeTintColor: '#e91e63',
+      labelStyle: {
+        fontSize: 12
+      }
+    }
   },
   NewDeck: {
-    screen: NewDeck
+    screen: NewDeck,
+    navigationOptions: {
+      tabBarIcon: () => <FontAwesome name="plus" size={30} color="#e1ce7a" />
+    },
+    tabBarOptions: {
+      activeTintColor: '#e91e63',
+      labelStyle: {
+        fontSize: 12
+      }
+    }
   }
 });
 

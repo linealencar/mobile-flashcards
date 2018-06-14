@@ -24,13 +24,14 @@ export default class Card extends Component {
             onIncrementScore={onIncrementScore}
           />
         )}
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => this.requestAnswer()}
-        >
-          <Text style={styles.textButton}> Answer </Text>
-        </TouchableOpacity>
+        {!showAnswer && (
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => this.requestAnswer()}
+          >
+            <Text style={styles.textButton}> Answer </Text>
+          </TouchableOpacity>
+        )}
       </View>
     );
   }
