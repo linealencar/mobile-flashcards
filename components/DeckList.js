@@ -4,8 +4,7 @@ import {
   Text,
   View,
   FlatList,
-  TouchableOpacity,
-  AsyncStorage
+  TouchableOpacity
 } from 'react-native';
 import { connect } from 'react-redux';
 import { fetchDecks } from '../actions';
@@ -21,7 +20,12 @@ class DeckList extends Component {
 
   render() {
     const { decks } = this.props;
-    return (
+
+    return decks.length === 0 ? (
+      <View>
+        <Text style={styles.text}>There is no decks to be shown. Add it!</Text>
+      </View>
+    ) : (
       <View>
         <FlatList
           data={decks}
@@ -41,12 +45,6 @@ class DeckList extends Component {
           )}
           keyExtractor={(item, index) => index.toString()}
         />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => this.props.navigation.navigate('NewDeck')}
-        >
-          <Text style={[styles.textButton]}> Add Deck </Text>
-        </TouchableOpacity>
       </View>
     );
   }
@@ -75,20 +73,5 @@ const styles = StyleSheet.create({
     color: '#424B54',
     fontWeight: 'bold',
     fontSize: 20
-  },
-  textButton: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 20
-  },
-  button: {
-    backgroundColor: '#424B54',
-    width: 200,
-    height: 45,
-    borderColor: '#fff',
-    borderWidth: 1,
-    borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center'
   }
 });

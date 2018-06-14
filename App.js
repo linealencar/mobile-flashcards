@@ -11,13 +11,24 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import reducer from './reducers';
 
-import { createStackNavigator } from 'react-navigation';
+import {
+  createStackNavigator,
+  createBottomTabNavigator
+} from 'react-navigation';
+
+const Tabs = createBottomTabNavigator({
+  DeckList: {
+    screen: DeckList
+  },
+  NewDeck: {
+    screen: NewDeck
+  }
+});
 
 const Stack = createStackNavigator({
-  DeckList: {
-    screen: DeckList,
+  Tabs: {
+    screen: Tabs,
     navigationOptions: {
-      title: 'Deck List',
       headerTintColor: '#424B54',
       headerStyle: {
         backgroundColor: '#EBCFB2'
@@ -37,16 +48,6 @@ const Stack = createStackNavigator({
     screen: Quiz,
     navigationOptions: {
       title: 'Quiz',
-      headerTintColor: '#424B54',
-      headerStyle: {
-        backgroundColor: '#EBCFB2'
-      }
-    }
-  },
-  NewDeck: {
-    screen: NewDeck,
-    navigationOptions: {
-      title: 'New Deck',
       headerTintColor: '#424B54',
       headerStyle: {
         backgroundColor: '#EBCFB2'
