@@ -5,7 +5,6 @@ import Quiz from './components/Quiz';
 import DeckList from './components/DeckList';
 import NewDeck from './components/NewDeck';
 import NewQuestion from './components/NewQuestion';
-import QuizAnswer from './components/QuizAnswer';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
@@ -77,16 +76,6 @@ const Stack = createStackNavigator({
     screen: NewQuestion,
     navigationOptions: {
       title: 'New Question',
-      headerTintColor: '#424B54',
-      headerStyle: {
-        backgroundColor: '#EBCFB2'
-      }
-    }
-  },
-  QuizAnswer: {
-    screen: QuizAnswer,
-    navigationOptions: {
-      title: 'Quiz Answer',
       headerTintColor: '#424B54',
       headerStyle: {
         backgroundColor: '#EBCFB2'

@@ -6,23 +6,21 @@ import {
   TouchableOpacity,
   TextInput
 } from 'react-native';
-import { updateQuestion } from '../utils/API';
+import { addCard } from '../actions';
+import { connect } from 'react-redux';
 
-export default class NewQuestion extends Component {
+class NewQuestion extends Component {
   state = {
     question: '',
     answer: ''
   };
 
   submitQuestions = () => {
-    const { question, answer } = this.state;
-    const deck = this.props.navigation.getParam('deck');
-    const newQuestion = { question: question, answer: answer };
-    deck.questions.push(newQuestion);
-    title = deck.title;
+    const title = this.props.navigation.state.params.deckTitle;
 
-    updateQuestion({ title, deck });
-    this.props.navigation.navigate('Deck');
+    this.props.addCard(title, this.state);
+
+    this.props.navigation.goBack();
   };
   render() {
     const { question, answer } = this.state;
@@ -53,6 +51,15 @@ export default class NewQuestion extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  addCard: (title, card) => dispatch(addCard(title, card))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(NewQuestion);
 
 const styles = StyleSheet.create({
   container: {

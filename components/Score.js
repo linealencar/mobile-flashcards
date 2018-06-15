@@ -3,10 +3,24 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default class Score extends Component {
   render() {
-    const { score } = this.props;
+    const { score, navigation } = this.props;
     return (
       <View style={styles.container}>
         <Text style={styles.bigText}>{score}</Text>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => this.submitQuestions()}
+        >
+          <Text style={styles.textButton}> Restart </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.goBack()}
+        >
+          <Text style={styles.textButton}> Back to Deck </Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -23,5 +37,20 @@ const styles = StyleSheet.create({
     color: '#424B54',
     fontWeight: 'bold',
     fontSize: 50
+  },
+  textButton: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 20
+  },
+  button: {
+    backgroundColor: '#424B54',
+    width: 200,
+    height: 45,
+    borderColor: '#fff',
+    borderWidth: 1,
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });

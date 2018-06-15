@@ -4,9 +4,6 @@ import { connect } from 'react-redux';
 import { fetchDecks } from '../actions';
 
 class Deck extends Component {
-  componentDidMount() {
-    this.props.fetchDecks();
-  }
   static navigationOptions = ({ navigation }) => {
     const { deckTitle } = navigation.state.params;
 
@@ -18,6 +15,7 @@ class Deck extends Component {
     const deckTitle = this.props.navigation.getParam('deckTitle');
     const { decks } = this.props;
     const deck = decks.find(obj => obj.title === deckTitle);
+
     return (
       <View style={styles.container}>
         <Text style={styles.bigText}>{deck.questions.length} cards</Text>
@@ -35,7 +33,7 @@ class Deck extends Component {
           style={styles.button}
           onPress={() =>
             this.props.navigation.navigate('NewQuestion', {
-              deck: deck
+              deckTitle: deck.title
             })
           }
         >
@@ -49,13 +47,7 @@ const mapStateToProps = state => ({
   decks: state
 });
 
-const mapDispatchToProps = dispatch => ({
-  fetchDecks: () => dispatch(fetchDecks())
-});
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Deck);
+export default connect(mapStateToProps)(Deck);
 
 const styles = StyleSheet.create({
   container: {

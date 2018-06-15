@@ -9,16 +9,26 @@ export function submitDeck(title) {
   );
 }
 
-export function updateQuestion({ title, deck }) {
+export const addCard = async (title, card) => {
+  console.log('add card');
+  const deck = await getDeck(title);
+  console.log(deck);
+  deck.questions.push(card);
   return AsyncStorage.mergeItem(
     CARD_STORAGE_KEY,
-    JSON.stringify({ [title]: deck })
+    JSON.stringify({ [deck.title]: deck })
   );
-}
+};
 
 export function getDecks() {
   return AsyncStorage.getItem(CARD_STORAGE_KEY).then(resultData => {
     return resultData ? Object.values(JSON.parse(resultData)) : [];
+  });
+}
+
+export function getDeck(title) {
+  return AsyncStorage.getItem(CARD_STORAGE_KEY).then(resultData => {
+    return resultData ? JSON.parse(resultData)[title] : {};
   });
 }
 

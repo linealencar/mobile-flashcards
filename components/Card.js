@@ -8,30 +8,34 @@ export default class Card extends Component {
   };
 
   requestAnswer = () => {
-    this.setState({ showAnswer: true });
+    this.setState({ showAnswer: !this.state.showAnswer });
   };
   render() {
-    const { questions, index, onIncrementIndex, onIncrementScore } = this.props;
+    const { question, onIncrementIndex, onIncrementScore } = this.props;
     const { showAnswer } = this.state;
 
     return (
       <View style={styles.container}>
-        <Text style={styles.bigText}>{questions[index].question}?</Text>
-        {showAnswer && (
-          <Answer
-            answer={questions[index].answer}
-            onIncrementIndex={onIncrementIndex}
-            onIncrementScore={onIncrementScore}
-          />
+        {showAnswer ? (
+          <View>
+            <Text style={styles.mediumText}>{question.answer}</Text>
+            <Answer
+              onIncrementIndex={onIncrementIndex}
+              onIncrementScore={onIncrementScore}
+            />
+          </View>
+        ) : (
+          <View>
+            <Text style={styles.mediumText}>{question.question}</Text>
+          </View>
         )}
-        {!showAnswer && (
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => this.requestAnswer()}
-          >
-            <Text style={styles.textButton}> Answer </Text>
-          </TouchableOpacity>
-        )}
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => this.requestAnswer()}
+        >
+          <Text style={styles.textButton}> Answer </Text>
+        </TouchableOpacity>
       </View>
     );
   }

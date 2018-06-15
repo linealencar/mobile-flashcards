@@ -24,13 +24,12 @@ export default class Quiz extends Component {
       <View style={styles.container}>
         {index < questions.length ? (
           <Card
-            questions={questions}
-            index={index}
+            question={questions[index]}
             onIncrementIndex={this.incrementIndex}
             onIncrementScore={this.incrementScore}
           />
         ) : (
-          <Score score={score} />
+          <Score score={score} navigation={this.props.navigation} />
         )}
       </View>
     );

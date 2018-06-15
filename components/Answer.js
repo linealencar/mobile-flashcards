@@ -17,7 +17,6 @@ export default class Answer extends Component {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.mediumText}>{answer}</Text>
         <TouchableOpacity
           style={[styles.button]}
           onPress={() => this.submitCorrectAnswer()}
