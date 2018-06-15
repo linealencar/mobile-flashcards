@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   TextInput
 } from 'react-native';
-// import { submitDeck } from '../utils/API';
 import { connect } from 'react-redux';
 import { insertDeck } from '../actions';
 
@@ -22,8 +21,9 @@ class NewDeck extends Component {
   submit = () => {
     const title = this.state.title;
     this.props.insertDeck(title);
-    //submitDeck(title);
-    //this.props.navigation.navigate('DeckList');
+    this.props.navigation.navigate('Deck', {
+      deckTitle: title
+    });
   };
   render() {
     const { title } = this.state;

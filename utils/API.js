@@ -18,7 +18,7 @@ export function updateQuestion({ title, deck }) {
 
 export function getDecks() {
   return AsyncStorage.getItem(CARD_STORAGE_KEY).then(resultData => {
-    return Object.values(JSON.parse(resultData));
+    return resultData ? Object.values(JSON.parse(resultData)) : [];
   });
 }
 

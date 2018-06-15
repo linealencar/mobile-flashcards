@@ -16,8 +16,8 @@ export function addDeck(deck) {
 }
 
 export const insertDeck = title => dispatch =>
-  API.submitDeck(title).then(deck => {
-    dispatch(addDeck(deck));
+  API.submitDeck(title).then(() => {
+    dispatch(addDeck({ title: title, questions: [] }));
   });
 
 export function loadDecks(decks) {

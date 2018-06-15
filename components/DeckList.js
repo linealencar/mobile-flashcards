@@ -14,10 +14,6 @@ class DeckList extends Component {
     this.props.fetchDecks();
   }
 
-  componentDidUpdate() {
-    this.props.fetchDecks();
-  }
-
   render() {
     const { decks } = this.props;
 
