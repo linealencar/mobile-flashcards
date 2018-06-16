@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   TextInput
 } from 'react-native';
-import { addCard } from '../actions';
+import { insertCard } from '../actions';
 import { connect } from 'react-redux';
 
 class NewQuestion extends Component {
@@ -53,7 +53,7 @@ class NewQuestion extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  addCard: (title, card) => dispatch(addCard(title, card))
+  addCard: (title, card) => dispatch(insertCard(title, card))
 });
 
 export default connect(

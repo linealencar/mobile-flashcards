@@ -3,22 +3,16 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default class Score extends Component {
   render() {
-    const { score, navigation } = this.props;
+    const { score, onBackToDeck, onRestartQuiz } = this.props;
     return (
       <View style={styles.container}>
         <Text style={styles.bigText}>{score}</Text>
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => this.submitQuestions()}
-        >
+        <TouchableOpacity style={styles.button} onPress={onRestartQuiz}>
           <Text style={styles.textButton}> Restart </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.goBack()}
-        >
+        <TouchableOpacity style={styles.button} onPress={onBackToDeck}>
           <Text style={styles.textButton}> Back to Deck </Text>
         </TouchableOpacity>
       </View>

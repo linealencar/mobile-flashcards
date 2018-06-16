@@ -6,30 +6,49 @@ import Score from './Score';
 export default class Quiz extends Component {
   state = {
     index: 0,
-    score: 0
+    score: 0,
+    showAnswer: false
   };
 
-  incrementIndex = () => {
-    this.setState({ index: this.state.index + 1 });
+  restartQuiz = () => {
+    this.setState({ index: 0, score: 0, showAnswer: false });
   };
 
-  incrementScore = () => {
-    this.setState({ score: this.state.score + 1 });
+  toggleAnswer = () => {
+    this.setState({ showAnswer: !this.state.showAnswer });
+  };
+
+  handleAnswer = points => {
+    const { index, score } = this.state;
+    this.setState({
+      index: index + 1,
+      score: score + points,
+      showAnswer: false
+    });
   };
 
   render() {
-    const questions = this.props.navigation.getParam('questions');
-    const { index, score } = this.state;
+    const { index, score, showAnswer } = this.state;
+    const { navigation } = this.props;
+    const { questions } = navigation.state.params;
     return (
       <View style={styles.container}>
+        <Text>
+          {index + 1}/{questions.length}
+        </Text>
         {index < questions.length ? (
           <Card
             question={questions[index]}
-            onIncrementIndex={this.incrementIndex}
-            onIncrementScore={this.incrementScore}
+            onHandleAnswer={this.handleAnswer}
+            onToggleAnswer={this.toggleAnswer}
+            showAnswer={showAnswer}
           />
         ) : (
-          <Score score={score} navigation={this.props.navigation} />
+          <Score
+            score={score}
+            onBackToDeck={() => this.props.navigation.goBack()}
+            onRestartQuiz={this.restartQuiz}
+          />
         )}
       </View>
     );
