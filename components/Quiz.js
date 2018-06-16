@@ -24,7 +24,7 @@ export default class Quiz extends Component {
 
   handleAnswer = points => {
     const { index, score } = this.state;
-    const { questions } = navigation.state.params;
+    const { questions } = this.props.navigation.state.params;
     this.setState({
       index: index + 1,
       score: score + points,
