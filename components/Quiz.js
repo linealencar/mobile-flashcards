@@ -32,7 +32,7 @@ export default class Quiz extends Component {
     });
 
     if (index >= questions.length) {
-      clearLocalNotification().then(setLocalNotification());
+      clearLocalNotification().then(setLocalNotification);
     }
   };
 
