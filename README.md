@@ -11,8 +11,7 @@ To get started developing right away:
     
 ## Platforms
 
-The project was used and tested at the platforms:
+The project was used and tested at the platform:
 
     - iOS
-    - Android
     
