@@ -10,6 +10,7 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import reducer from './reducers';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { setLocalNotification } from './utils/APINotifications';
 
 import {
   createStackNavigator,
@@ -85,6 +86,9 @@ const Stack = createStackNavigator({
 });
 
 export default class App extends Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
   render() {
     const store = createStore(reducer, applyMiddleware(thunk));
 

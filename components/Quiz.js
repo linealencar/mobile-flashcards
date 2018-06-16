@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Card from './Card';
 import Score from './Score';
+import {
+  clearLocalNotification,
+  setLocalNotification
+} from '../utils/APINotifications';
 
 export default class Quiz extends Component {
   state = {
@@ -20,11 +24,16 @@ export default class Quiz extends Component {
 
   handleAnswer = points => {
     const { index, score } = this.state;
+    const { questions } = navigation.state.params;
     this.setState({
       index: index + 1,
       score: score + points,
       showAnswer: false
     });
+
+    if (index >= questions.length) {
+      clearLocalNotification().then(setLocalNotification());
+    }
   };
 
   render() {
